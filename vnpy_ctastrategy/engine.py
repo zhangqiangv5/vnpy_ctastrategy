@@ -791,6 +791,13 @@ class CtaEngine(BaseEngine):
         path2: Path = Path.cwd().joinpath("strategies")
         self.load_strategy_class_from_folder(path2, "strategies")
 
+        if "venv" in path1.parts:
+            path3: Path = Path(str(path1).split("venv")[0]).joinpath("strategies")
+            self.load_strategy_class_from_folder(path3, "strategies")
+        if ".venv" in path1.parts:
+            path3: Path = Path(str(path1).split(".venv")[0]).joinpath("strategies")
+            self.load_strategy_class_from_folder(path3, "strategies")
+
     def load_strategy_class_from_folder(self, path: Path, module_name: str = "") -> None:
         """
         Load strategy class from certain folder.
